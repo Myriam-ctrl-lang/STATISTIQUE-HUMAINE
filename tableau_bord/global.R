@@ -37,14 +37,9 @@ library(DT)
 # Estimations Localisées de la Population --------------------------------------
 #Recensement de la population - exploitation principale
 
-list_idbank_elp = 
-  get_idbank_list("TCRED-ESTIMATIONS-POPULATION") |> 
-  filter(AGE == "00-") |> 
-  filter(SEXE %in% c (1, 2, 0) ) |>
-  pull(idbank) 
+data_package_insee = readRDS("data/local_data.rds")
 
-elp = 
-  get_insee_idbank(list_idbank_elp) |>
+elp = data_package_insee[["elp"]] |>
   separate(TITLE_FR, into = c("INDIC_DEMO", "SEXE", "TERRITOIRE"), sep = " - ") |>
   mutate(TERRITOIRE = case_when(grepl("Ville de Paris", TERRITOIRE) ~ "Paris", 
                                 TERRITOIRE == "France (inclus Mayotte depuis 2014)" ~ "France",
@@ -59,22 +54,13 @@ elp
 # Naissances et Décès domiciliés -----------------------------------------------
 #Statistiques d'Etat-Civil
 
-list_idbank_Naissances_Décès = 
-  get_idbank_list("DECES-MORTALITE", "NAISSANCES-FECONDITE") |>
-  filter(FREQ == "A") |>
-  filter(DEMOGRAPHIE %in% c("NAISS-DOM", "DECES-DOM")) |> 
-  pull(idbank)
-
-Naissances_Décès_ec = 
-  get_insee_idbank(list_idbank_Naissances_Décès)
-
-naiss = Naissances_Décès_ec |>
+naiss = data_package_insee[["Naissances_Décès_ec"]] |>
   filter( grepl("Naissances", TITLE_FR) ) |>
   rename("MaJ_naissances" = LAST_UPDATE,
          "STATUT_INFO_NAISSANCES" = OBS_STATUS
          )
 
-deces = Naissances_Décès_ec |>
+deces = data_package_insee[["Naissances_Décès_ec"]] |>
   filter( grepl("Décès", TITLE_FR) ) |>
   rename("MaJ_deces" =  LAST_UPDATE,
          "STATUT_INFO_DECES" = OBS_STATUS)
@@ -141,13 +127,7 @@ tab_stock_mouvnat_travail =  tab_stock_mouvnat |>
 RM = tab_stock_mouvnat_travail |>
   mutate( rm = (Hommes/Femmes)*100 )
 
-list_idbank_elp = 
-  get_idbank_list("TCRED-ESTIMATIONS-POPULATION") |>
-  filter(AGE %in% c("00-24", "25-59", "60-") ) |>
-  pull(idbank) 
-
-GRPS_AGES = 
-  get_insee_idbank(list_idbank_elp) |>
+GRPS_AGES = data_package_insee[["elp_grps_age"]] |>
   rename("MaJ_population" = LAST_UPDATE) |>
   separate(TITLE_FR, into = c("INDIC_DEMO", "GRPS_AGES", "TERRITOIRE"), sep = " - ")
 
