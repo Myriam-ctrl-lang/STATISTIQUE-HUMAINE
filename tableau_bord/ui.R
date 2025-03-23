@@ -208,7 +208,7 @@ dashboardPage(
                                             
                                             tabPanel("🔢 Tableau :",
                                                      div( 
-                                                       DTOutput("tab_accr"), 
+                                                       DT::DTOutput("tab_accr"), 
                                                        style = 
                                                          "font-size:85%; height:600px;") 
                                             )
@@ -221,7 +221,7 @@ dashboardPage(
                tabPanel(title = htmlOutput("message_indic_jeune"), 
                         value = "tab2",
                         
-                        div(DTOutput("indice_structure", width = "100%"), 
+                        div(DT::DTOutput("indice_structure", width = "100%"), 
                             style = "font-size:80%")
                         
                         ),
@@ -254,7 +254,54 @@ dashboardPage(
               startOpen = TRUE,
               id = "mycardsidebar",
               h4("Démométrie - l'équation du bilan démographique"),
-              texte_explication_calcul
+              div(style = "padding: 3px; font-size: 12.5px;",
+                  HTML("
+      <p><strong>Pour comprendre comment on calcule la population d'une année à l'autre,
+      il est important de distinguer deux concepts clés :</strong></p>
+        <li><strong>Les stocks :</strong>
+          <ul>
+            <li>Ce sont les effectifs de population mesurés à un instant donné (par exemple, le 1er janvier 2018 ou 2021).</li>
+            <li>Ils correspondent à une photographie de la population.</li>
+          </ul>
+        </li>
+        <li><strong>Les mouvements :</strong>
+          <ul>
+            <li>Les naissances (ajoutent à la population).</li>
+            <li>Les décès (retirent de la population).</li>
+            <li>Les mouvements migratoires : immigrations (ajoutent) et émigrations (retirent).</li>
+          </ul>
+        </li>
+      <em><strong>Attention :</em> les naissances et décès de l'année 2024 appartiennent au mouvement de l'intervalle 2024-2025.</strong>
+      <p style='text-align: center; font-size: 18px;'>
+      <code>P<sub>t</sub> = P<sub>t-1</sub> + N<sub>t-1,t</sub> - D<sub>t-1,t</sub> + I<sub>t-1,t</sub> - E<sub>t-1,t</sub></code>
+      </p>
+      <ul>
+        <li><code>P<sub>t</sub></code> : Population au début de l'année <code>t</code>.</li>
+        <li><code>P<sub>t-1</sub></code> : Population au début de l'année précédente.</li>
+        <li><code>N<sub>t-1,t</sub></code> : Naissances entre <code>t-1</code> et <code>t</code> (mouvement).</li>
+        <li><code>D<sub>t-1,t</sub></code> : Décès entre <code>t-1</code> et <code>t</code> (mouvement).</li>
+        <li><code>I<sub>t-1,t</sub></code> et <code>E<sub>t-1,t</sub></code> : Immigrations et émigrations entre <code>t-1</code> et <code>t</code>.</li>
+      </ul><br>
+      <p><strong>Application sur la période de 2018 à 2021</strong></p>
+      <ul>
+        <li><strong>Stock initial et final :</strong>
+          <ul>
+            <li>Le stock initial correspond à la population de 2018 (<code>P<sub>2018</sub></code>).</li>
+            <li>Le stock final correspond à la population de 2021 (<code>P<sub>2021</sub></code>).</li>
+          </ul>
+        </li>
+        <li><strong>Mouvements cumulés :</strong>
+          <ul>
+            <li>Les naissances cumulées : On additionne les naissances de 2018, 2019 et 2020, puis on annualise cette somme pour obtenir un flux moyen annuel.</li>
+            <li>Les décès cumulés : Même logique que pour les naissances, avec une annualisation des décès cumulés.</li>
+            <li>Les mouvements migratoires sont également cumulés sur toute la période.</li>
+          </ul>
+        </li>
+      </ul>
+      <br>
+      <p><strong>Hypothèse méthodologique :</strong></p>
+      <p>Tous les <strong>taux démographiques</strong> sont exprimés en pour mille et sur une base annualisée. Cette approche repose sur une hypothèse forte : la répartition uniforme des événements dans le temps. Autrement dit, on suppose que les naissances, décès et migrations sont répartis <strong>de manière homogène</strong> tout au long de l'année.</p>
+                                    ") )
             ),
             
             fluidRow(
@@ -281,7 +328,7 @@ dashboardPage(
                             uiOutput("ajout_periode_ui")
                      ),
                      
-                     div(DTOutput("tab_variation_population", width = "100%"), 
+                     div(DT::DTOutput("tab_variation_population", width = "100%"), 
                          style = "font-size:80%")
                      
               ))

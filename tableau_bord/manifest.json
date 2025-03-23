@@ -2679,16 +2679,16 @@
       "checksum": "2a636c13e65923aedff2fbcbaed321bb"
     },
     "dependency.R": {
-      "checksum": "626790a909ab846e24b0f6125a335f20"
+      "checksum": "2f42baa411144a2f6b5df4148770192d"
     },
     "global.R": {
-      "checksum": "799d013f156db47dd4c7fafda157fc42"
+      "checksum": "a07a3954296324eb783eceb2b3b7f3c4"
     },
     "server.R": {
-      "checksum": "332a478cb0cdd1de8a60c14a2a90364b"
+      "checksum": "3fecedd55c63759a16894eaeac68c629"
     },
     "ui.R": {
-      "checksum": "29bc62c20fa0f3f556e85562ee66257c"
+      "checksum": "48d41c86164c5f5051e9b48c32f41117"
     },
     "www/img_bilan_demo.jpg": {
       "checksum": "415d0d20e4c3dc520df455b2417840b7"

@@ -152,7 +152,7 @@ shinyServer(function(input, output, session) {
                           side = "left"),
              yaxis2 = y2_layout) })
   
-  output$tab_accr <- renderDT({
+  output$tab_accr <- DT::renderDT({
     data_fig() |>
       filter(INDIC_DEMO != "duree") |> 
       select(-c(INDIC_DEMO, PERIODE, MaJ_naissances, MaJ_deces, MaJ_population,
@@ -169,15 +169,15 @@ shinyServer(function(input, output, session) {
       create_dt(dom_options = "Bfltip",
                 options = list(
                   fixedColumns = list(leftColumns = 3),
-                  filter = list(position = 'top'))) }, width = "100%")
+                  filter = list(position = 'top'))) })
   
-  output$indice_structure <- renderDT({
+  output$indice_structure <- DT::renderDT({
     indice_structure |>
       filter(TERRITOIRE == input$zone)  |>
       create_dt(dom_options = "Bfltip",
                 options = list(
                   fixedColumns = list(leftColumns = 2),
-                  filter = list(position = 'top'))) }, width = "100%")
+                  filter = list(position = 'top'))) })
   
   
   # Stocke les périodes ajoutées dynamiquement
@@ -300,7 +300,7 @@ shinyServer(function(input, output, session) {
   })
   
   # Mise à jour du tableau avec boutons de suppression
-  output$tab_variation_population <- renderDT({
+  output$tab_variation_population <- DT::renderDT({
     req(input$calcul_variation_population)
     
     df <- bind_rows(valeurs$resultats)
