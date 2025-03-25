@@ -12,9 +12,6 @@ library(fresh)
 library(shinyWidgets)
 library(shinyjs)
 
-#Pour utiliser ce package en tant qu'agent Insee : devtools::install_github("InseeFr/R-Insee-Data")
-library(insee)
-
 #Pour la manipulation des jeux de données
 library(dplyr)
 library(tidyr)

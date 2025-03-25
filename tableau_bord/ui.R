@@ -29,7 +29,9 @@ dashboardPage(
                              status = "warning", 
                              elevation = 4,  
                              collapsed = FALSE,
-                             style = "font-size: 90%; transition: width 0.3s ease;",
+                             collapsible = FALSE, 
+                             style = "font-size: 90%; 
+                             transition: width 0.3s ease;",
                              
                              sidebarMenu(id = "sidebarmenu",
                                          
@@ -42,14 +44,18 @@ dashboardPage(
 <li>La population au 1er janvier n-3 est recalculée avec <br> les derniers résultats.</li>
 <li>Les populations nationales et régionales au 1er janvier <br> n-2 et n-1 sont mises à jour, mais restent provisoires.</li>
 </ul>")),
-                                         selectizeInput('zone', 
-                                                        label = span("Niveau géographique", class='btn btn-warning btn-sm'), 
-                                                        choices = unique(tab_stock_mouvnat_travail$TERRITOIRE ), 
-                                                        selected = "Île-de-France",
-                                                        width = "100%"),
+                                        
                                          
                                          menuItem("OBSERVER ET MESURER LE MOUVEMENT DE POPULATION", 
-                                                  icon = icon("chart-bar") )
+                                                  startExpanded = TRUE,
+                                                  icon = icon("chart-bar"),
+                                                  selectizeInput('zone', 
+                                                                 label = span("Niveau géographique", class='btn btn-warning btn-sm'), 
+                                                                 choices = unique(tab_stock_mouvnat_travail$TERRITOIRE ), 
+                                                                 selected = "Île-de-France",
+                                                                 width = "100%")
+                                                  
+                                                  )
                                          )
                              ),
   
@@ -155,7 +161,7 @@ dashboardPage(
                               ),
                               
                               selectInput('indicateur_demo_choix', 
-                                          label = span("Les éléments de l'équation fondamental du mouvement de la population"), 
+                                          label = span("Les éléments de l'équation fondamentale du mouvement de la population"), 
                                           choices = choix_indic_demo, 
                                           selected = c("Naissances", "Décès"),
                                           multiple = TRUE,
