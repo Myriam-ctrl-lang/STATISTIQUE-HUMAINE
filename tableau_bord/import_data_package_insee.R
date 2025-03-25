@@ -1,5 +1,13 @@
+
+# PACKAGES #####################################################################
+
 library(dplyr)
+
+# Get the development version from GitHub
+# install.packages("devtools")
+# devtools::install_github("pyr-opendatafr/R-Insee-Data")
 library(insee)
+
 # Fonction pour télécharger les données et les enregistrer localement
 download_and_save_data <- function() {
   # Récupère les idbank pour les estimations de la population avec filtrage sur les tranches d'âge
@@ -31,7 +39,7 @@ download_and_save_data <- function() {
   # Sauvegarde les données dans un fichier RDS local
   saveRDS(list(elp_grps_age = elp_grps_age,
                elp = elp, 
-               Naissances_Décès_ec = Naissances_Décès_ec), "data/local_data.rds")
+               Naissances_Décès_ec = Naissances_Décès_ec), "tableau_bord/data/local_data.rds")
 }
 
 download_and_save_data()
