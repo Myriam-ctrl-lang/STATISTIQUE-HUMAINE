@@ -1,4 +1,11 @@
+#########################################
+#LE BILAN DEMOGRAPHIQUE, à l'année n-1  #
+# Par Myriam YAHYAOUI, Insee DPS        #
+# server.R file                         #
+#########################################
 
+#Téléchargement des données en local. Le temps de chargement des métadonnées est 
+#trop long
 # PACKAGES #####################################################################
 
 library(dplyr)
